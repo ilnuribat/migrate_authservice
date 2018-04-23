@@ -10,6 +10,8 @@ async function connect() {
   broker = new ServiceBroker({
     namespace: 'authService',
     transporter: process.env.AUTH_SERVICE_TRANSPORTER || 'redis://localhost:6378',
+    logger: console,
+    logLevel: 'debug',
   });
 
   console.log('broker added');
