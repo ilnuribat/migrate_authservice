@@ -6,13 +6,19 @@ require('dotenv').config();
 let broker;
 
 async function connect() {
+  console.log('creating broker');
   broker = new ServiceBroker({
     namespace: 'authService',
     transporter: process.env.AUTH_SERVICE_TRANSPORTER || 'redis://localhost:6378',
   });
 
-  await broker.start();
+  console.log('broker added');
 
+  console.log('starting broker');
+  await broker.start();
+  console.log('broker started');
+
+  console.log('waiting for User service');
   return broker.waitForServices('User');
 }
 
